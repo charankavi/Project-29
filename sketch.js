@@ -11,6 +11,7 @@ var stone;
 var slingshot;
 var block1,block2,block3,block4,block5,block6,block7,block8,block9;
 var block10,block11,block12,block13,block14,block15,block16;
+var gameState = "onSling";
 
 function setup() {
 	createCanvas(1200, 600);
@@ -66,7 +67,9 @@ function draw() {
   rectMode(CENTER);
   background(210);
 
-text(mouseX + "," + mouseY,mouseX,mouseY);
+
+text("Pull the box and destory the blocks",15,230);
+text("Press space for second chance",20,250);
 
 
 ground1.display();
@@ -97,17 +100,20 @@ block14.display();
 }
 
 function mouseDragged(){
+  if(gameState != "launch"){
     Matter.Body.setPosition(stone.body, {x: mouseX , y: mouseY});
+  }
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gameState = "launch" ;
 }
 
 function keyPressed(){
     if(keyCode == 32){
-		
+      gameState = "onSling"
         slingshot.attach(stone.body);
     }
 }
